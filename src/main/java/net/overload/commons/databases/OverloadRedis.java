@@ -84,12 +84,12 @@ public class OverloadRedis {
 
 				if (Utils.isBukkit()) {
 					if (channel.equals("toAllServers")) {
-
+						if(message.equals("stop")) System.exit(0);
 					}
 
 					if (channel.equals("to." + Bukkit.getServerName())) {
 						if (database.exists("Server:" + Bukkit.getServerName())) {
-							
+							if(message.equals("stop")) System.exit(0);
 						}
 					}
 				} else {

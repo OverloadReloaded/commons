@@ -14,7 +14,7 @@ public enum Rank {
 	HELPER("helper", "§1§lHELPER §7", "§f", 40, Arrays.asList(""), Arrays.asList("")),
 	MOD("mod", "§6§lMOD §7", "§f", 50, Arrays.asList(""), Arrays.asList("")),
 	DEV("dev", "§c§lDEV §7", "§f", 60, Arrays.asList(""), Arrays.asList("")),
-	ADMIN("admin", "§4§lADMIN §7", "§f", 80, Arrays.asList(""), Arrays.asList(""));
+	ADMIN("admin", "§4§lADMIN §7", "§f", 80, Arrays.asList(""), Arrays.asList("minecraft.command.stop"));
 
 	private String databaseName;
 

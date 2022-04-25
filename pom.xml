@@ -130,6 +130,7 @@
 							<include>io.github.classgraph</include>
 							<include>org.slf4j</include>
 							<include>log4j</include>
+							<include>com.github.azbh111</include>
 						</includes>
 					</artifactSet>
 				</configuration>

@@ -10,7 +10,7 @@ import net.overload.commons.databases.OverloadRedis;
 import net.overload.commons.databases.mongo.OverloadMongoDatabase;
 import net.overload.commons.events.CommonsEventBungee;
 import net.overload.commons.logger.LogLevel;
-import net.overload.commons.players.managers.PermissionsManager;
+import net.overload.commons.players.managers.RankPermissionsManager;
 import net.overload.commons.players.managers.ProfileManager;
 
 public class CommonsPluginBungee extends Plugin {
@@ -24,7 +24,7 @@ public class CommonsPluginBungee extends Plugin {
 	public OverloadMongoDatabase database;
 	
 	public ProfileManager profileManager;
-	public PermissionsManager pmm;
+	public RankPermissionsManager pmm;
 	
 	/**
 	 * Plugin interface
@@ -47,7 +47,7 @@ public class CommonsPluginBungee extends Plugin {
 		ProxyServer.getInstance().getPluginManager().registerListener(this, new CommonsEventBungee());
 			
 		profileManager = new ProfileManager(this);
-		pmm = new PermissionsManager();
+		pmm = new RankPermissionsManager();
 		pmm.init();
 		
 		
@@ -68,8 +68,7 @@ public class CommonsPluginBungee extends Plugin {
 			config = new OverloadConfiguration("../redis.properties");
 			config.check();
 		} catch (Exception e) {
-			logger().send(LogLevel.CRITICAL, "Config",
-					"Could not load the configuration file. Please contact administrators or developers.");
+			logger().send(LogLevel.CRITICAL, "Config", "Could not load the configuration file. Please contact administrators or developers.");
 			if (config.getDebug())
 				logger().send(LogLevel.DEBUG, "Config", e.getStackTrace().toString());
 		}
@@ -92,6 +91,7 @@ public class CommonsPluginBungee extends Plugin {
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask() {
 					public void run() {
+						logger().send(LogLevel.DEBUG, "Checking redis connection !");
 						if(!redis.getDatabase().isConnected() || !redis.getJedis().isConnected()) {
 							redis.connect(false);
 						}

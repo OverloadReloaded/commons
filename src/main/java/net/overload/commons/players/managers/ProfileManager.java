@@ -50,6 +50,7 @@ public class ProfileManager {
 	
 	public void remove(UUID uuid) {
 		save(uuid);
+		//Bukkit.getPlayer(uuid).removeAttachment(this.profiles.get(uuid).getPermissionAttachment());
 		if(this.profiles.containsKey(uuid)) this.profiles.remove(uuid);
 	}
 	
@@ -100,5 +101,4 @@ public class ProfileManager {
 	public Map<UUID, Profile> getProfiles() {
 		return this.profiles;
 	}
-
 }

@@ -225,8 +225,8 @@ public final class ReflectionManager {
 	}
 
 	public enum PackageType {
-		MINECRAFT_SERVER("net.minecraft.server." + getServerVersion()),
-		CRAFTBUKKIT("org.bukkit.craftbukkit." + getServerVersion()), CRAFTBUKKIT_BLOCK(CRAFTBUKKIT.getPath() + "block"),
+		MINECRAFT_SERVER("net.minecraft.server." + getServerVersion() + "."),
+		CRAFTBUKKIT("org.bukkit.craftbukkit." + getServerVersion() + "."), CRAFTBUKKIT_BLOCK(CRAFTBUKKIT.getPath() + "block"),
 		CRAFTBUKKIT_CHUNKIO(CRAFTBUKKIT.getPath() + "chunkio"), CRAFTBUKKIT_COMMAND(CRAFTBUKKIT.getPath() + "command"),
 		CRAFTBUKKIT_CONVERSATIONS(CRAFTBUKKIT.getPath() + "conversations"),
 		CRAFTBUKKIT_ENCHANTMENS(CRAFTBUKKIT.getPath() + "enchantments"),

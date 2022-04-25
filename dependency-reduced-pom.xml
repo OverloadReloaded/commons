@@ -38,6 +38,7 @@
               <include>io.github.classgraph</include>
               <include>org.slf4j</include>
               <include>log4j</include>
+              <include>com.github.azbh111</include>
             </includes>
           </artifactSet>
         </configuration>
@@ -77,12 +78,6 @@
       <artifactId>waterfall-api</artifactId>
       <version>1.18-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.azbh111</groupId>
-      <artifactId>craftbukkit-1.8.8</artifactId>
-      <version>R</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.comphenix.protocol</groupId>

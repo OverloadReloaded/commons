@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,8 +32,10 @@ import net.overload.commons.logger.LogLevel;
 import net.overload.commons.logger.Logger;
 import net.overload.commons.nms.NMSUtils;
 import net.overload.commons.nms.ReflectionManager;
-import net.overload.commons.players.managers.PermissionsManager;
+import net.overload.commons.players.managers.PermissionManager;
 import net.overload.commons.players.managers.ProfileManager;
+import net.overload.commons.players.managers.RankPermissionsManager;
+import net.overload.commons.players.permissions.PermissionCheck;
 import net.overload.commons.server.MinecraftServerInfo;
 import net.overload.commons.server.MinecraftServerState;
 import net.overload.commons.server.MinecraftServerType;
@@ -51,7 +52,8 @@ public class CommonsPluginBukkit extends JavaPlugin {
 
 	public MinecraftServerInfo msi;
 	public ProfileManager pm;
-	public PermissionsManager pmm;
+	public PermissionManager perms;
+	public RankPermissionsManager pmm;
 
 	/**
 	 * Plugin interface
@@ -74,7 +76,8 @@ public class CommonsPluginBukkit extends JavaPlugin {
 
 		msi = new MinecraftServerInfo(Bukkit.getServerName(), Bukkit.getPort(), MinecraftServerState.STARTING, MinecraftServerType.NONE, Bukkit.getMaxPlayers(), 0, new ArrayList<>(), new HashMap<>());
 		pm = new ProfileManager(this);
-		pmm = new PermissionsManager();
+		perms = new PermissionManager();
+		pmm = new RankPermissionsManager();
 		pmm.init();
 
 		getServer().getPluginManager().registerEvents(new CommonsEventBukkit(), this);
@@ -96,12 +99,12 @@ public class CommonsPluginBukkit extends JavaPlugin {
 	 */
 	
 	public void stop() {
-		redis.getJedis().publish("deleteServer", Bukkit.getServerName());
+		/*redis.getJedis().publish("deleteServer", Bukkit.getServerName());
 		try {
 			TimeUnit.SECONDS.sleep(1);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 		System.exit(0);
 	}
 
@@ -173,7 +176,7 @@ public class CommonsPluginBukkit extends JavaPlugin {
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 			@Override
 			public void run() {
-				msi.update(true);
+				msi.update(false);
 			}
 		}, 60L, 60L);
 	}
@@ -193,8 +196,11 @@ public class CommonsPluginBukkit extends JavaPlugin {
 								if (pl.getDescription().getCommands() != null) {
 									for (String cmd : pl.getDescription().getCommands().keySet()) {
 										if(pm.getProfile(player.getUniqueId()) != null) {
-											if (pmm.getBukkitPermsFromRank(pm.getProfile(player.getUniqueId()).getData().getRank()).contains((pl.getName() + "." + cmd).toLowerCase())) {
+											/*if (pmm.getBukkitPermsFromRank(pm.getProfile(player.getUniqueId()).getData().getRank()).contains((pl.getName() + "." + cmd).toLowerCase())) {
 												cmds.add("/" + cmd);
+											}*/
+											if(new PermissionCheck(player).hasPermission(cmd)) {
+												cmds.add(cmd);
 											}
 										}
 									}

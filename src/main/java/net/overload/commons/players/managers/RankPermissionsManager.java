@@ -5,12 +5,12 @@ import java.util.HashMap;
 
 import net.overload.commons.players.enums.Rank;
 
-public class PermissionsManager {
+public class RankPermissionsManager {
 
 	private HashMap<Rank, ArrayList<String>> bukkitPerms;
 	private HashMap<Rank, ArrayList<String>> bungeePerms;
 	
-	public PermissionsManager() {
+	public RankPermissionsManager() {
 		this.bukkitPerms = new HashMap<Rank, ArrayList<String>>();
 		this.bungeePerms = new HashMap<Rank, ArrayList<String>>();
 	}
@@ -47,7 +47,7 @@ public class PermissionsManager {
 		
 		
 		ArrayList<String> admin = new ArrayList<>();
-		admin.add("");
+		admin.add("minecraft.command.stop");
 		
 		bukkitPerms.put(Rank.NONE, none);
 		bukkitPerms.put(Rank.VIP, vip);
@@ -59,6 +59,50 @@ public class PermissionsManager {
 		bukkitPerms.put(Rank.DEV, dev);
 		bukkitPerms.put(Rank.ADMIN, admin);
 		
+		
+
+		ArrayList<String> bnone = new ArrayList<>();
+		none.add("");
+		
+		ArrayList<String> bvip = new ArrayList<>();
+		vip.add("");
+		
+		ArrayList<String> bmvp = new ArrayList<>();
+		mvp.add("");
+		
+		
+		ArrayList<String> byt = new ArrayList<>();
+		yt.add("");
+		
+		
+		ArrayList<String> bstaff = new ArrayList<>();
+		staff.add("");
+		
+		
+		ArrayList<String> bhelper = new ArrayList<>();
+		helper.add("");
+		
+		
+		ArrayList<String> bmod = new ArrayList<>();
+		mod.add("");
+		
+		
+		ArrayList<String> bdev = new ArrayList<>();
+		dev.add("");
+		
+		
+		ArrayList<String> badmin = new ArrayList<>();
+		admin.add("overload.register");
+		
+		bungeePerms.put(Rank.NONE, bnone);
+		bungeePerms.put(Rank.VIP, bvip);
+		bungeePerms.put(Rank.MVP, bmvp);
+		bungeePerms.put(Rank.YT, byt);
+		bungeePerms.put(Rank.STAFF, bstaff);
+		bungeePerms.put(Rank.HELPER, bhelper);
+		bungeePerms.put(Rank.MOD, bmod);
+		bungeePerms.put(Rank.DEV, bdev);
+		bungeePerms.put(Rank.ADMIN, badmin);
 	}
 	
 	public ArrayList<String> getBukkitPermsFromRank(Rank rank) {
